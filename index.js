@@ -4,6 +4,7 @@ const port = 3000
 const sqlite3 = require('sqlite3')
 const Movie = require('./Models/movie')
 const sequelize = require('./config')
+const { Sequelize } = require('sequelize')
 
 /********** USING ORM ************************* */
 // Connecting Database
@@ -24,17 +25,40 @@ sequelize.sync({ force: false })
         console.log("Error : " + error)
     })
 
-app.get('/add', (req, res) => {
+
+app.get('/add', async (req, res) => {
     const { title, year, rating } = req.query;
     try {
-        Movie.create({ title, year, rating })
+       await Movie.create({ title, year, rating })
         res.json("movie added")
     }
     catch (error) {
         res.json(error)
     }
-
 })
+
+app.get('/get', async (req, res) => {
+    try {
+      const movies= await Movie.findAll()
+        res.json(movies)
+    }
+    catch (error) {
+        res.json(error)
+    }
+})
+
+// // 1. find movie by Id
+
+
+
+// // 2. find where rate>5
+// // find where rate>=5
+
+
+
+// // 3. find movie where title contains OO
+
+
 /********************************************************/
 /***********************WITHOUT ORM**********************/
 
@@ -59,11 +83,11 @@ app.get('/add', (req, res) => {
 
 
 // app.get('/add',(req,res)=>{
-//     const {title,year,rating}=req.query;
+//     const {title,year,rating,language}=req.query;
 //     try{
 
 //     dB.run(
-//       `INSERT INTO Movies(title,year,rating) VALUES (?,?,?)`,[title,year,rating]
+//       `INSERT INTO Movies(title,year,rating,language) VALUES (?,?,?,?)`,[title,year,rating,language]
 //     )
 //     res.json("movie added")
 //     }
@@ -71,6 +95,7 @@ app.get('/add', (req, res) => {
 //         res.json("movie not added")
 //     }
 // })
+
 /********************************************************/
 
 app.get('/', (req, res) => {
