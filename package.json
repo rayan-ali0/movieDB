@@ -1,0 +1,24 @@
+{
+  "name": "movie",
+  "version": "0.0.0",
+  "description": "movie",
+  "main": "index.js",
+  "scripts": {
+"dev":"nodemon index.js"  
+},
+  "repository": {
+    "type": "git",
+    "url": "git"
+  },
+  "keywords": [
+    "git"
+  ],
+  "author": "0",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
