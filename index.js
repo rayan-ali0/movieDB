@@ -4,10 +4,11 @@ const port = 3000
 const sqlite3 = require('sqlite3')
 const Movie = require('./Models/movie')
 const sequelize = require('./config')
-const { Sequelize } = require('sequelize')
+const Sequelize  = require('sequelize')
 
 /********** USING ORM ************************* */
 // Connecting Database
+
 let db = new sqlite3.Database("movieDatabase.db", (err) => {
     if (err) {
         console.log("Error Occurred - " + err.message);
@@ -16,7 +17,8 @@ let db = new sqlite3.Database("movieDatabase.db", (err) => {
         console.log("DataBase Connected..");
     }
 })
-
+// synchronize defined models with database
+// it creates or updates db tables based on the model definitions
 sequelize.sync({ force: false })
     .then(() => {
         console.log("your tables synchronized successfully")
