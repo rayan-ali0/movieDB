@@ -4,7 +4,7 @@ const port = 3000
 const sqlite3 = require('sqlite3')
 const Movie = require('./Models/movie')
 const sequelize = require('./config')
-const Sequelize  = require('sequelize')
+const Sequelize = require('sequelize')
 
 /********** USING ORM ************************* */
 // Connecting Database
@@ -29,9 +29,9 @@ sequelize.sync({ force: false })
 
 
 app.get('/add', async (req, res) => {
-    const { title, year, rating } = req.query;
+    const { title, year, rating ,language} = req.query;
     try {
-       await Movie.create({ title, year, rating })
+        await Movie.create({ title, year, rating , language})
         res.json("movie added")
     }
     catch (error) {
@@ -41,7 +41,7 @@ app.get('/add', async (req, res) => {
 
 app.get('/get', async (req, res) => {
     try {
-      const movies= await Movie.findAll()
+        const movies = await Movie.findAll()
         res.json(movies)
     }
     catch (error) {
@@ -49,18 +49,54 @@ app.get('/get', async (req, res) => {
     }
 })
 
-// // 1. find movie by Id
 
+// // 1. find movie by Id
+app.get('/get/id/:Id', async (req, res) => {
+    const Id = req.params.Id;
+    try {
+        /******Put your answer here *********/
+        const movie= await Movie.findByPk(Id)
+        // res.json(movie)
+        const movieDetails=movie.printDetails();
+       res.send( movieDetails);
+    }
+
+    catch (error) {
+        res.json(error)
+    }
+})
 
 
 // // 2. find where rate>5
 // // find where rate>=5
 
+app.get('/get/rate', async (req, res) => {
+    try {
+        /******Put your answer here *********/
+        
+        res.json(movie)
+    }
 
+    catch (error) {
+        res.json(error)
+    }
+
+})
 
 // // 3. find movie where title contains OO
 
+app.get('/get/like', async (req, res) => {
+    try {
+        /******Put your answer here *********/
 
+        res.json(movie)
+    }
+
+    catch (error) {
+        res.json(error)
+    }
+
+})
 /********************************************************/
 /***********************WITHOUT ORM**********************/
 

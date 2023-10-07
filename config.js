@@ -1,3 +1,4 @@
+// configuration file to specify your database connection details
 const Sequelize=require('sequelize')
 
 const sequelize= new Sequelize({
