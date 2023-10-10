@@ -1,7 +1,8 @@
 const Sequelize=require('sequelize')
-const sequelize=require('../config')
+const sequelize=require('../config') //database Configuration
 
 //we define the models using define method . 
+//This model represents a database table
 //These method are created as objects that can interact with your db tables
 const Movie= sequelize.define('Movie',{
     id:{
@@ -30,13 +31,25 @@ const Movie= sequelize.define('Movie',{
 
 })
 
-
-
+// a custom method to print movie details
+// it can be called , just like call a method on an object
 Movie.prototype.printDetails=function(){
-    return `Movie title : ${this.title}<br>Year: ${this.year}`
+    return `Your Movie is printed using custom method <br><br>Movie title : ${this.title}<br>Year: ${this.year}`
 }
 
 module.exports= Movie;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**

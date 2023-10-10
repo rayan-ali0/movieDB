@@ -41,7 +41,9 @@ app.get('/add', async (req, res) => {
 
 app.get('/get', async (req, res) => {
     try {
-        const movies = await Movie.findAll()
+        const movies = await Movie.findAll({
+            attributes :['title','year']
+        })
         res.json(movies)
     }
     catch (error) {
@@ -55,10 +57,10 @@ app.get('/get/id/:Id', async (req, res) => {
     const Id = req.params.Id;
     try {
         /******Put your answer here *********/
-        const movie= await Movie.findByPk(Id)
+        
         // res.json(movie)
         const movieDetails=movie.printDetails();
-       res.send( movieDetails);
+       res.send(movieDetails);
     }
 
     catch (error) {
@@ -73,7 +75,7 @@ app.get('/get/id/:Id', async (req, res) => {
 app.get('/get/rate', async (req, res) => {
     try {
         /******Put your answer here *********/
-        
+       
         res.json(movie)
     }
 
@@ -100,17 +102,7 @@ app.get('/get/like', async (req, res) => {
 /********************************************************/
 /***********************WITHOUT ORM**********************/
 
-
-// const dB=new sqlite3.Database('movieDatabase.db',(error)=>{
-//     if(error){
-//         console.log("Error"+error.message)
-//     }
-//     else{
-//         console.log('database Connected')
-//     }
-// })
-
-// dB.run(`
+// db.run(`
 //   CREATE TABLE IF NOT EXISTS Movies (
 //     id INTEGER PRIMARY KEY AUTOINCREMENT,
 //     title TEXT,
@@ -124,7 +116,7 @@ app.get('/get/like', async (req, res) => {
 //     const {title,year,rating,language}=req.query;
 //     try{
 
-//     dB.run(
+//     db.run(
 //       `INSERT INTO Movies(title,year,rating,language) VALUES (?,?,?,?)`,[title,year,rating,language]
 //     )
 //     res.json("movie added")
@@ -137,7 +129,7 @@ app.get('/get/like', async (req, res) => {
 /********************************************************/
 
 app.get('/', (req, res) => {
-    res.send("Hello")
+    res.send("WELCOME IN ORM WORLD")
 })
 
 app.listen(port, () => {
