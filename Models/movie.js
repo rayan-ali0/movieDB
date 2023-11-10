@@ -59,7 +59,5 @@ module.exports= Movie;
 
 
 // This is a Static Method , It will be for thw whole Class
-// Movie.printDetails = async function(){
-//        return `Movie title : ${this.title}<br>Year: ${this.year}`
 
 // }

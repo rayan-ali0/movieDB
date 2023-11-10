@@ -57,7 +57,7 @@ app.get('/get/id/:Id', async (req, res) => {
     const Id = req.params.Id;
     try {
         /******Put your answer here *********/
-        
+        const movie=await Movie.findByPk(Id)
         // res.json(movie)
         const movieDetails=movie.printDetails();
        res.send(movieDetails);
@@ -75,7 +75,11 @@ app.get('/get/id/:Id', async (req, res) => {
 app.get('/get/rate', async (req, res) => {
     try {
         /******Put your answer here *********/
-       
+       const movie= await Movie.findAll({
+        where : {
+            rating : { [Sequelize.Op.gte ]: 5},
+        }
+       })
         res.json(movie)
     }
 
@@ -90,7 +94,11 @@ app.get('/get/rate', async (req, res) => {
 app.get('/get/like', async (req, res) => {
     try {
         /******Put your answer here *********/
-
+const movie=await Movie.findAll({
+    where :{
+        title: { [Sequelize.Op.like]: '%oo%'}
+    }
+})
         res.json(movie)
     }
 
